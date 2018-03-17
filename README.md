@@ -11,7 +11,7 @@ In addition to the above, we also spin up a Redis server, and Mailhog for email 
 Fork it, and tweak it as required. GitHub has [comprehensive instructions](https://help.github.com/articles/syncing-a-fork/) on syncing your fork with the upstream repository, but here are the Cliff Notes for the hard of reading:
 
 ```
-$ git remote add upstream https://monooso@bitbucket.org/experience/docker-lemp.git
+$ git remote add upstream https://github.com/monooso/docker-lemp.git
 $ git fetch upstream
 $ git checkout master
 $ git merge upstream/master
