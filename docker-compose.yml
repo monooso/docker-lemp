@@ -1,0 +1,47 @@
+version: "3.2"
+
+services:
+  app:
+    image: monooso/docker-php:latest
+    depends_on:
+      - mysql
+      - redis
+    volumes:
+      - ${PATH_APP_ROOT}:/var/code
+      - ${PATH_LOGS_ROOT}/app:/var/log:delegated
+
+  email:
+    image: mailhog/mailhog:latest
+    ports:
+      - 1025:1025
+      - 1080:8025
+
+  mysql:
+    image: monooso/docker-mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USERNAME}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - 3306:3306
+    user: "1000"
+    volumes:
+      - ${PATH_DATA_ROOT}/mysql:/var/lib/mysql:delegated
+      - ${PATH_LOGS_ROOT}/mysql:/var/log:delegated
+
+  nginx:
+    image: monooso/docker-nginx:latest
+    depends_on:
+      - app
+    ports:
+      - 80:80
+    volumes:
+      - ${PATH_APP_ROOT}:/var/code/app:ro
+      - ${PATH_CONFIG_ROOT}/nginx/sites:/etc/nginx/conf.d:ro
+      - ${PATH_LOGS_ROOT}/nginx:/var/log/nginx:delegated
+
+  redis:
+    image: redis:3.2
+    ports:
+      - 6379:6379
