@@ -17,7 +17,7 @@ services:
       - 1080:8025
 
   mysql:
-    image: monooso/docker-mysql:latest
+    image: monooso/docker-mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -31,7 +31,7 @@ services:
       - ${PATH_LOGS_ROOT}/mysql:/var/log:delegated
 
   nginx:
-    image: monooso/docker-nginx:latest
+    image: monooso/docker-nginx:1.13
     depends_on:
       - app
     ports:

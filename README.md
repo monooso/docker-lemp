@@ -1,9 +1,9 @@
 # Docker LEMP Stack #
 A Docker-based LEMP stack, for use on macOS. Uses the following custom base images, so we don't have to rebuild everything from scratch:
 
-- [monooso/docker-mysql:latest](https://github.com/monooso/docker-mysql)
-- [monooso/docker-nginx:latest](https://github.com/monooso/docker-nginx)
-- [monooso/docker-php:latest](https://github.com/monooso/docker-php)
+- [monooso/docker-mysql:5.7](https://github.com/monooso/docker-mysql)
+- [monooso/docker-nginx:1.13](https://github.com/monooso/docker-nginx)
+- [monooso/docker-php:7.1](https://github.com/monooso/docker-php)
 
 In addition to the above, we also spin up a Redis server, and Mailhog for email testing.
 
