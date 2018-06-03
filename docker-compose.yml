@@ -8,7 +8,6 @@ services:
       - redis
     volumes:
       - ${PATH_APP_ROOT}:/var/code
-      - ${PATH_LOGS_ROOT}/app:/var/log:delegated
 
   email:
     image: mailhog/mailhog:latest
@@ -28,7 +27,6 @@ services:
     user: "1000"
     volumes:
       - ${PATH_DATA_ROOT}/mysql:/var/lib/mysql:delegated
-      - ${PATH_LOGS_ROOT}/mysql:/var/log:delegated
 
   nginx:
     image: monooso/docker-nginx:1.13
@@ -39,7 +37,6 @@ services:
     volumes:
       - ${PATH_APP_ROOT}:/var/code/app:ro
       - ${PATH_CONFIG_ROOT}/nginx/sites:/etc/nginx/conf.d:ro
-      - ${PATH_LOGS_ROOT}/nginx:/var/log/nginx:delegated
 
   redis:
     image: redis:3.2
