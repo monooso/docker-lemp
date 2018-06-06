@@ -30,6 +30,8 @@ Duplicate the `.env.example` file, and name it `.env`. Edit the configuration va
 | `PATH_APP_ROOT`        | `./../app`   | The path to the project application code directory. |
 | `PATH_CONFIG_ROOT`     | `./config`   | The path to the project config directory. The default config directory include an nginx site config file, which should work for most projects. If you need to customise things, just point the `PATH_CONFIG_ROOT` to a different directory. |
 | `PATH_DATA_ROOT`       | `./data`     | The path to the project data directory, for use with MySQL. |
+| `USERID`               | `1000`       | The default container user. Run `echo $(id -u)` to determine your user ID. |
+| `GROUPID`              | `1000`       | The default container user group. Run `echo $(id -g)` to determine your group ID. |
 
 Note that the `PATH_*` variables _must not_ include a trailing slash.
 

@@ -24,6 +24,7 @@ services:
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - 3306:3306
+    user: ${USERID}:${GROUPID}
     volumes:
       - ${PATH_DATA_ROOT}/mysql:/var/lib/mysql:delegated
 
