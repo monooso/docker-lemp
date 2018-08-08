@@ -6,6 +6,8 @@ services:
     depends_on:
       - mysql
       - redis
+    environment:
+      XDEBUG_CONFIG: "${XDEBUG_CONFIG}"
     volumes:
       - ${PATH_APP_ROOT}:/var/code
 
