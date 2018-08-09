@@ -32,6 +32,7 @@ Duplicate the `.env.example` file, and name it `.env`. Edit the configuration va
 | `PATH_DATA_ROOT`       | `./data`     | The path to the project data directory, for use with MySQL. |
 | `USERID`               | `1000`       | The default container user. Run `echo $(id -u)` to determine your user ID. |
 | `GROUPID`              | `1000`       | The default container user group. Run `echo $(id -g)` to determine your group ID. |
+| `XDEBUG_CONFIG`        |             | Custom xdebug config values which may be used to override (some of) the `xdebug.ini` settings. See the note below for an example of using this configuration value with Docker for Mac. |
 
 Note that the `PATH_*` variables _must not_ include a trailing slash.
 
@@ -62,3 +63,11 @@ Determine the I.P. address of the Docker VM, using `dinghy ip`. Then configure a
 - Username: `root`
 - Password: `secret` (unless you changed it in your `.env`)
 - Port: `3306`
+
+## Docker for Mac ##
+### xdebug ###
+Docker for Mac doesn't play nicely with the standard xdebug configuration. To fix this, set the `XDEBUG_CONFIG` variable in your `.env` file as follows:
+
+```
+XDEBUG_CONFIG=remote_host=docker.for.mac.localhost
+```
