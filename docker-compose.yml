@@ -31,7 +31,7 @@ services:
       - ${PATH_DATA_ROOT}/mysql:/var/lib/mysql:delegated
 
   nginx:
-    image: monooso/docker-nginx:1.13
+    image: monooso/docker-nginx:1.15
     depends_on:
       - app
     ports:
