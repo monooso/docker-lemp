@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   app:
-    image: monooso/docker-php:7.1
+    image: monooso/docker-php:7.2
     depends_on:
       - mysql
       - redis
@@ -16,6 +16,11 @@ services:
     ports:
       - 1025:1025
       - 1080:8025
+
+  memcached:
+    image: memcached:1.5-alpine
+    ports:
+      - 11211:11211
 
   mysql:
     image: monooso/docker-mysql:5.7
@@ -31,7 +36,7 @@ services:
       - ${PATH_DATA_ROOT}/mysql:/var/lib/mysql:delegated
 
   nginx:
-    image: monooso/docker-nginx:1.13
+    image: monooso/docker-nginx:1.15
     depends_on:
       - app
     ports:
