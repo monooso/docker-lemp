@@ -2,10 +2,10 @@
 A Docker-based LEMP stack, for use on macOS. Uses the following custom base images, so we don't have to rebuild everything from scratch:
 
 - [monooso/docker-mysql:5.7](https://github.com/monooso/docker-mysql)
-- [monooso/docker-nginx:1.13](https://github.com/monooso/docker-nginx)
-- [monooso/docker-php:7.1](https://github.com/monooso/docker-php)
+- [monooso/docker-nginx:1.15](https://github.com/monooso/docker-nginx)
+- [monooso/docker-php:7.2](https://github.com/monooso/docker-php)
 
-In addition to the above, we also spin up a Redis server, and Mailhog for email testing.
+In addition to the above, we also spin up a Memcached server, a Redis server, and Mailhog for email testing.
 
 ## How to use this repository ##
 Fork it, and tweak it as required. GitHub has [comprehensive instructions](https://help.github.com/articles/syncing-a-fork/) on syncing your fork with the upstream repository, but here are the Cliff Notes for the hard of reading:
@@ -42,30 +42,29 @@ $ docker-compose up -d
 $ docker-compose down -v
 ```
 
-## Viewing the website ##
-Assuming you're only hosting one site at a time with this stack (the intended use-case), you shouldn't need to mess with your `/etc/hosts`; your site with be available at `http://<anything>.docker`.
+## Everyday usage ##
+The following instructions assume that we're running everything on [Docker for Mac](https://docs.docker.com/docker-for-mac/).
 
-If you don't like the `.docker` TLD (Dinghy's default), you can change it by editing your `~/.dinghy/preferences.yml` file:
+### Viewing the website ###
+Modify the `server_name` value in the sample Nginx site config file (`config/nginx/sites/app.conf`). For SSL to work correctly, the site _must_ be `<something>.local.vm`.
+
+Once that's done, add an entry to your `/etc/hosts` file, to direct `<something>.local.vm` to `127.0.0.1` (assuming you're using [Docker for Mac](https://docs.docker.com/docker-for-mac/)).
+
+For example:
 
 ```
----
-:preferences:
-  :dinghy_domain: vm
+127.0.0.1    mysite.local.vm
 ```
 
-## Connecting to the database ##
-The following instructions assume that we're running everything within a [Dinghy](https://github.com/codekitchen/dinghy) VM.
+### Using Sequel Pro ###
+Configure a "standard" Sequel Pro connection, with the following settings:
 
-### Sequel Pro ###
-Determine the I.P. address of the Docker VM, using `dinghy ip`. Then configure a "standard" Sequel Pro connection, with the following settings:
-
-- Host: `<dinghy ip address>`
+- Host: `127.0.0.1`
 - Username: `root`
 - Password: `secret` (unless you changed it in your `.env`)
 - Port: `3306`
 
-## Docker for Mac ##
-### xdebug ###
+### Using xdebug ###
 Docker for Mac doesn't play nicely with the standard xdebug configuration. To fix this, set the `XDEBUG_CONFIG` variable in your `.env` file as follows:
 
 ```
