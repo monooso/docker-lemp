@@ -2,7 +2,7 @@ version: "3.2"
 
 services:
   app:
-    image: monooso/docker-php:7.2
+    image: monooso/docker-php:7.3
     depends_on:
       - mysql
       - redis
@@ -23,7 +23,7 @@ services:
       - 11211:11211
 
   mysql:
-    image: monooso/docker-mysql:5.7
+    image: monooso/docker-mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -36,7 +36,7 @@ services:
       - ${PATH_DATA_ROOT}/mysql:/var/lib/mysql:delegated
 
   nginx:
-    image: monooso/docker-nginx:1.15
+    image: monooso/docker-nginx:1.17
     depends_on:
       - app
     ports:
@@ -46,6 +46,6 @@ services:
       - ${PATH_CONFIG_ROOT}/nginx/sites:/etc/nginx/conf.d:ro
 
   redis:
-    image: redis:3.2
+    image: redis:5.0
     ports:
       - 6379:6379
