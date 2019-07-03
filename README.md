@@ -1,9 +1,9 @@
 # Docker LEMP Stack #
-A Docker-based LEMP stack, for use on macOS. Uses the following custom base images, so we don't have to rebuild everything from scratch:
+A Docker-based LEMP stack. Uses the following custom base images, so we don't have to rebuild everything from scratch:
 
-- [monooso/docker-mysql:5.7](https://github.com/monooso/docker-mysql)
-- [monooso/docker-nginx:1.15](https://github.com/monooso/docker-nginx)
-- [monooso/docker-php:7.2](https://github.com/monooso/docker-php)
+- [monooso/docker-mysql:8.0](https://github.com/monooso/docker-mysql)
+- [monooso/docker-nginx:1.17](https://github.com/monooso/docker-nginx)
+- [monooso/docker-php:7.3](https://github.com/monooso/docker-php)
 
 In addition to the above, we also spin up a Memcached server, a Redis server, and Mailhog for email testing.
 
@@ -32,7 +32,7 @@ Duplicate the `.env.example` file, and name it `.env`. Edit the configuration va
 | `PATH_DATA_ROOT`       | `./data`     | The path to the project data directory, for use with MySQL. |
 | `USERID`               | `1000`       | The default container user. Run `echo $(id -u)` to determine your user ID. |
 | `GROUPID`              | `1000`       | The default container user group. Run `echo $(id -g)` to determine your group ID. |
-| `XDEBUG_CONFIG`        |             | Custom xdebug config values which may be used to override (some of) the `xdebug.ini` settings. See the note below for an example of using this configuration value with Docker for Mac. |
+| `XDEBUG_CONFIG`        |              | Custom xdebug config values which may be used to override (some of) the `xdebug.ini` settings. See the note below for an example of using this configuration value with Docker for Mac. |
 
 Note that the `PATH_*` variables _must not_ include a trailing slash.
 
@@ -42,13 +42,13 @@ $ docker-compose up -d
 $ docker-compose down -v
 ```
 
-## Everyday usage ##
+## Everyday usage on macOS ##
 The following instructions assume that we're running everything on [Docker for Mac](https://docs.docker.com/docker-for-mac/).
 
 ### Viewing the website ###
-Modify the `server_name` value in the sample Nginx site config file (`config/nginx/sites/app.conf`). For SSL to work correctly, the site _must_ be `<something>.local.vm`.
+Modify the `server_name` value in the sample Nginx site config file (`config/nginx/sites/app.conf`). For SSL to work correctly, the site _must_ be `<something>.test`.
 
-Once that's done, add an entry to your `/etc/hosts` file, to direct `<something>.local.vm` to `127.0.0.1` (assuming you're using [Docker for Mac](https://docs.docker.com/docker-for-mac/)).
+Once that's done, add an entry to your `/etc/hosts` file, to direct `<something>.test` to `127.0.0.1`.
 
 For example:
 
